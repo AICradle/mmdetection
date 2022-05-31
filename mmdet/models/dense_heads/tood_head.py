@@ -305,8 +305,8 @@ class TOODHead(ATSSHead):
         # it is an equivalent implementation of bilinear interpolation
         # b, c, h, w = feat.shape
         # weight = feat.new_ones(c, 1, 1, 1)
-        y = self.spatial_shift(feat, feat.clone())
         # y = deform_conv2d(feat, offset, weight, 1, 0, 1, c, c)
+        y = self.spatial_shift(feat, feat.clone())
         return y
 
     def anchor_center(self, anchors):
