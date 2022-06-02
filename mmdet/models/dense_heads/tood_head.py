@@ -252,7 +252,7 @@ class TOODHead(ATSSHead):
             # cls prediction and alignment
             cls_logits = self.tood_cls(cls_feat)
             cls_prob = self.cls_prob_module(feat)
-            cls_score = self.sigmoid_geometric_mean(cls_logits, cls_prob)
+            cls_score = sigmoid_geometric_mean(cls_logits, cls_prob)
 
             # reg prediction and alignment
             if self.anchor_type == 'anchor_free':
@@ -303,10 +303,10 @@ class TOODHead(ATSSHead):
             offset (Tensor): Spatial offset for feature sampling
         """
         # it is an equivalent implementation of bilinear interpolation
-        # b, c, h, w = feat.shape
-        # weight = feat.new_ones(c, 1, 1, 1)
-        # y = deform_conv2d(feat, offset, weight, 1, 0, 1, c, c)
-        y = self.spatial_shift(feat, feat.clone())
+        b, c, h, w = feat.shape
+        weight = feat.new_ones(c, 1, 1, 1)
+        y = deform_conv2d(feat, offset, weight, 1, 0, 1, c, c)
+        # y = self.spatial_shift(feat, feat.clone())
         return y
 
     def anchor_center(self, anchors):
