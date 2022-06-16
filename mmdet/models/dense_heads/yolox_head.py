@@ -253,6 +253,7 @@ class YOLOXHead(BaseDenseHead, BBoxTestMixin):
         scale_factors = np.array(
             [img_meta['scale_factor'] for img_meta in img_metas])
 
+
         num_imgs = len(img_metas)
         featmap_sizes = [cls_score.shape[2:] for cls_score in cls_scores]
         mlvl_priors = self.prior_generator.grid_priors(
