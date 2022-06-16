@@ -136,9 +136,8 @@ class CocoDataset(CustomDataset):
             img_id = self.img_ids[i]
             if self.filter_empty_gt and img_id not in ids_in_cat:
                 continue
-            if min(img_info['width'], img_info['height']) >= min_size:
-                valid_inds.append(i)
-                valid_img_ids.append(img_id)
+            valid_inds.append(i)
+            valid_img_ids.append(img_id)
         self.img_ids = valid_img_ids
         return valid_inds
 
